@@ -1,2 +1,6 @@
 # Pycharm
 .idea/
+
+# pytest
+.pytest_cache/
+test_cases.txt
