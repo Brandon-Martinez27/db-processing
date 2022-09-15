@@ -1,0 +1,6 @@
+---
+dialect: mysql
+driver: mysqlconnector
+host: 157.230.209.171
+port: 3306
+database: employees
