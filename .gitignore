@@ -6,4 +6,5 @@
 test_cases.txt
 
 # Project specific
-db_processing/env.py
+env.py
+creds.yml
