@@ -1,0 +1,7 @@
+---
+columns:
+  - emp_no
+  - first_name
+  - last_name
+table: employees
+limit: 10

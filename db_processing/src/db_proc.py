@@ -30,4 +30,40 @@ class DbProc:
             % urlquote(creds["password"])
         )
 
-        print(self.conn)
+    def read_data(self, config: dict, sql=None):
+        """Reads data by passing a query to SQL Alchemy connection engine
+        and returns it as a dictionary
+
+        Parameters
+        ----------
+            config: dict
+                configuration for the sql query to populate select query
+                (columns, table, schema, ect.)
+            query: str
+                Custom query in the case query requires more complexity
+        """
+        if sql is not None:
+            query = sql
+        else:
+            cols = ",".join(
+                (
+                    [col for col in config["columns"]]
+                )
+            )
+            table = config["table"]
+            limit = config["limit"]
+            query = f"SELECT {cols} FROM {table} LIMIT {limit}"
+
+        with self.conn.connect() as conn:
+
+            result = conn.execute(
+                query
+            ).fetchall()
+
+            d, result_list = {}, []
+            for row in result:
+                for column, value in row.items():
+                    d = {**d, **{column: value}}
+                result_list.append(d)
+
+        return result_list
